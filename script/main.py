@@ -7,6 +7,7 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from bs4 import BeautifulSoup
 import urllib, urllib.request, urllib.error
 from retry import retry
+import time
 
 KOREAN_DRAMAS_TOP = "https://filmarks.com/list-drama/country/147"
 DRAMA_DETAIL = "https://filmarks.com/dramas/{}/{}"
@@ -17,6 +18,7 @@ driver = webdriver.Remote(
 
 @retry(ValueError,tries=10, delay=10)
 def get_reviews(drama_series_id, drama_season_id, page=1):
+    time.sleep(2)
     print("Get Reviews: page=", page)
 
     driver.get(DRAMA_DETAIL.format(drama_series_id, drama_season_id) + "?page={}".format(page))
