@@ -119,7 +119,7 @@ def get_page(url):
 
         drama_data = get_detail(drama_series_id, drama_season_id)
 
-        with open("results/{}.json".format(i), mode="w") as f:
+        with open("results/{}.json".format(i), mode="a") as f:
             f.write(json.dumps(drama_data))
 
 
