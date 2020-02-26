@@ -6,6 +6,7 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 from bs4 import BeautifulSoup
 import urllib, urllib.request, urllib.error
+from retry import retry
 
 KOREAN_DRAMAS_TOP = "https://filmarks.com/list-drama/country/147"
 DRAMA_DETAIL = "https://filmarks.com/dramas/{}/{}"
@@ -14,7 +15,7 @@ driver = webdriver.Remote(
     command_executor='http://selenium-hub:4444/wd/hub',
     desired_capabilities=DesiredCapabilities.CHROME)
 
-
+@retry(ValueError,tries=10, delay=10)
 def get_reviews(drama_series_id, drama_season_id, page=1):
     print("Get Reviews: page=", page)
 
