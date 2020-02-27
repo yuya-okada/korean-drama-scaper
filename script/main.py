@@ -64,28 +64,35 @@ def get_detail(drama_series_id, drama_season_id):
     print("Starts=", stars)
 
     # Year
-    year = detail_body.find(class_="p-content-detail__title").find("a").get_text()
-    print("Year=", year)
+    title_elem = detail_body.find(class_="p-content-detail__title")
+    if title_elem and title_elem.find("a"):
+        year = title_elem.find("a").get_text()
+        print("Year=", year)
 
     # Casts
-    cast_elements = detail_body.find(class_="p-content-detail__people-list-casts").find_all("a")
-    casts = [cast_element.get_text() for cast_element in cast_elements]
-    print("Casts=", casts)
+    cast_elem = detail_body.find(class_="p-content-detail__people-list-casts")
+    if cast_elem:
+        cast_elements = cast_elem.find_all("a")
+        casts = [cast_element.get_text() for cast_element in cast_elements]
+        print("Casts=", casts)
 
     # Movies
-    amazon_prime = ""
-    netflix = ""
-    movie_elements = detail_body.find(class_="p-content-detail-related-info-content__vod").find_all("a")
-    movies = [movie_element.get("href") for movie_element in movie_elements]
-    for movie in movies:
-        if "amazon" in movie:  # Amazon Prime
-            amazon_prime = movie
+    vod = detail_body.find(class_="p-content-detail-related-info-content__vod")
 
-        elif "netflix" in movie:  # Netflix
-            netflix = movie
+    if vod:
+        amazon_prime = ""
+        netflix = ""
+        movie_elements = detail_body.find(class_="p-content-detail-related-info-content__vod").find_all("a")
+        movies = [movie_element.get("href") for movie_element in movie_elements]
+        for movie in movies:
+            if "amazon" in movie:  # Amazon Prime
+                amazon_prime = movie
 
-    print("Amazon Prime=", amazon_prime)
-    print("Netflix=", netflix)
+            elif "netflix" in movie:  # Netflix
+                netflix = movie
+
+        print("Amazon Prime=", amazon_prime)
+        print("Netflix=", netflix)
 
     # Reviews
     reviews = get_reviews(drama_series_id, drama_season_id)
