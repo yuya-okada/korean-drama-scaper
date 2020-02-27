@@ -103,7 +103,7 @@ def get_detail(drama_series_id, drama_season_id):
     }
 
 
-def get_page(url, page_number=None):
+def get_page(url, page_number=0):
     if page_number:
         url += "?page={}".format(page_number)
 
@@ -137,6 +137,7 @@ def get_page(url, page_number=None):
         with open("./results/{}".format(filename), mode="a") as f:
             f.write(json.dumps(drama_data, ensure_ascii=False))
 
+    get_page(url, page_number + 1)
 
 # 韓国のドラマ一覧
 get_page(KOREAN_DRAMAS_TOP)
