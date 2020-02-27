@@ -103,7 +103,12 @@ def get_detail(drama_series_id, drama_season_id):
     }
 
 
-def get_page(url):
+def get_page(url, page_number=None):
+    if page_number:
+        url += "?page={}".format(page_number)
+
+
+
     print("Get Page:", url)
     html = urllib.request.urlopen(url)
     soup = BeautifulSoup(html, features="html.parser")
@@ -116,7 +121,11 @@ def get_page(url):
             is_first = False
             continue
 
-        if os.path.exists("results/{}.json".format(i)):
+        filename = "{}.json".format(i)
+        if page_number:
+            filename = str(page_number) + "_" + filename
+
+        if os.path.exists("./results/{}".format(filename)):
             continue
 
         drama_data = json.loads(drama.attrs["data-drama-season-clip"])
@@ -125,7 +134,7 @@ def get_page(url):
 
         drama_data = get_detail(drama_series_id, drama_season_id)
 
-        with open("results/{}.json".format(i), mode="a") as f:
+        with open("./results/{}".format(filename), mode="a") as f:
             f.write(json.dumps(drama_data, ensure_ascii=False))
 
 
