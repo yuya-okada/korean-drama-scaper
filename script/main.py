@@ -8,6 +8,7 @@ import os
 from bs4 import BeautifulSoup
 import urllib, urllib.request, urllib.error
 from retry import retry
+import time
 
 KOREAN_DRAMAS_TOP = "https://filmarks.com/list-drama/country/147"
 DRAMA_DETAIL = "https://filmarks.com/dramas/{}/{}"
@@ -18,6 +19,7 @@ driver = webdriver.Remote(
 
 @retry(ValueError,tries=10, delay=10)
 def get_reviews(drama_series_id, drama_season_id, page=1):
+    time.sleep(2)
     print("Get Reviews: page=", page)
 
     driver.get(DRAMA_DETAIL.format(drama_series_id, drama_season_id) + "?page={}".format(page))
@@ -122,7 +124,7 @@ def get_page(url):
 
         drama_data = get_detail(drama_series_id, drama_season_id)
 
-        with open("results/{}.json".format(i), mode="w") as f:
+        with open("results/{}.json".format(i), mode="a") as f:
             f.write(json.dumps(drama_data))
 
 
