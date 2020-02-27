@@ -3,6 +3,7 @@ import json
 import time
 from selenium import webdriver
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+import os
 
 from bs4 import BeautifulSoup
 import urllib, urllib.request, urllib.error
@@ -47,7 +48,8 @@ def get_detail(drama_series_id, drama_season_id):
 
     # Detail
     details = detail_body.find_all(class_="p-content-detail__synopsis-desc")
-    detail = details[1].get_text()  # [0]は，「続きを読む」クリック前の短いもの
+
+    detail = details[-1].get_text()  # [0]は，「続きを読む」クリック前の短いもの
     print("Detail=", detail)
 
     # Thumbnail
@@ -109,6 +111,9 @@ def get_page(url):
     for i, drama in enumerate(dramas):
         if is_first:  # 最初の要素は違うやつなので無視
             is_first = False
+            continue
+
+        if os.path.exists("results/{}.json".format(i)):
             continue
 
         drama_data = json.loads(drama.attrs["data-drama-season-clip"])
