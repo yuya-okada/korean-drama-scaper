@@ -125,7 +125,7 @@ def get_page(url):
         drama_data = get_detail(drama_series_id, drama_season_id)
 
         with open("results/{}.json".format(i), mode="a") as f:
-            f.write(json.dumps(drama_data))
+            f.write(json.dumps(drama_data, ensure_ascii=False))
 
 
 # 韓国のドラマ一覧
