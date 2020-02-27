@@ -51,8 +51,9 @@ def get_detail(drama_series_id, drama_season_id):
     # Detail
     details = detail_body.find_all(class_="p-content-detail__synopsis-desc")
 
-    detail = details[-1].get_text()  # [0]は，「続きを読む」クリック前の短いもの
-    print("Detail=", detail)
+    if details and len(details):
+        detail = details[-1].get_text()  # [0]は，「続きを読む」クリック前の短いもの
+        print("Detail=", detail)
 
     # Thumbnail
     thumbnail = detail_body.find(class_="c-content__jacket").find("img").get("src")
