@@ -49,6 +49,7 @@ def get_detail(drama_series_id, drama_season_id):
     print("Title=", title)
 
     # Detail
+    detail = None
     details = detail_body.find_all(class_="p-content-detail__synopsis-desc")
 
     if details and len(details):
@@ -70,6 +71,7 @@ def get_detail(drama_series_id, drama_season_id):
         print("Year=", year)
 
     # Casts
+    casts = None
     cast_elem = detail_body.find(class_="p-content-detail__people-list-casts")
     if cast_elem:
         cast_elements = cast_elem.find_all("a")
@@ -79,9 +81,9 @@ def get_detail(drama_series_id, drama_season_id):
     # Movies
     vod = detail_body.find(class_="p-content-detail-related-info-content__vod")
 
+    amazon_prime = ""
+    netflix = ""
     if vod:
-        amazon_prime = ""
-        netflix = ""
         movie_elements = detail_body.find(class_="p-content-detail-related-info-content__vod").find_all("a")
         movies = [movie_element.get("href") for movie_element in movie_elements]
         for movie in movies:
