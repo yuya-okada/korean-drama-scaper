@@ -148,6 +148,8 @@ def get_page(url, page_number=0):
         with open("./results/{}".format(filename), mode="a") as f:
             f.write(json.dumps(drama_data, ensure_ascii=False))
 
+    if not page_number:
+        page_number+=1
     get_page(url, page_number + 1)
 
 # 韓国のドラマ一覧
