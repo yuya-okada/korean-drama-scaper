@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1de4cdae-282d-4664-a5ce-bbe521e20959" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python-selenium/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/python-selenium/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/script/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/script/main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -60,7 +61,7 @@
       <workItem from="1577160936102" duration="101000" />
       <workItem from="1581489173604" duration="252000" />
       <workItem from="1581489467013" duration="8031000" />
-      <workItem from="1582706588619" duration="5274000" />
+      <workItem from="1582706588619" duration="5718000" />
     </task>
     <servers />
   </component>

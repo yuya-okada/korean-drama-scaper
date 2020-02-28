@@ -29,7 +29,9 @@ def get_reviews(drama_series_id, drama_season_id, page=1):
     review_elems = reviews_container.find_all(class_="p-mark__review")
     reviews = [review_elem.get_text() for review_elem in review_elems]
 
-    if "is-hidden" not in reviews_container.find(class_="c-pagination__next").get("class"):
+    next_elem = reviews_container.find(class_="c-pagination__next")
+
+    if next_elem and "is-hidden" not in next_elem.get("class"):
         reviews.extend(get_reviews(drama_series_id, drama_season_id, page + 1))  # 次のページの内容を追加
 
     return reviews
