@@ -115,6 +115,7 @@ def get_detail(drama_series_id, drama_season_id):
 
 
 def get_page(url, page_number=0):
+    old_url = url
     if page_number:
         url += "?page={}".format(page_number)
 
@@ -150,7 +151,7 @@ def get_page(url, page_number=0):
 
     if not page_number:
         page_number+=1
-    get_page(url, page_number + 1)
+    get_page(old_url, page_number + 1)
 
 # 韓国のドラマ一覧
 get_page(KOREAN_DRAMAS_TOP)
